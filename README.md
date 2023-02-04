@@ -1,2 +1,2 @@
-# crypto-transfer
+# 🪙 Crypto Transfer
 ĐApp for transfer cryptocurrency
