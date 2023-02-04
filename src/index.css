@@ -20,8 +20,7 @@ button, input {
   border-radius: 10px;
   height: 36px;
   text-align: center;
-  margin: 1em;
-  margin-left: 0;
+  margin-bottom: 1em;
   font-family: 'Unbounded', cursive;
   cursor: pointer;
 }
@@ -72,6 +71,8 @@ footer a {
 
 .label {
   color: #6B69C8;
+  margin: 0;
+  padding-bottom: .6em;
 }
 
 .label span {
@@ -80,6 +81,14 @@ footer a {
 }
 
 .login {
+  text-align: center;
+}
+
+.login p {
+  margin: 0 0 .6em 0;
+}
+
+.login button {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -87,7 +96,7 @@ footer a {
   transition: .3s;
 }
 
-.login:hover {
+.login button:hover {
   background-color: #bbb;
 }
 
@@ -102,4 +111,22 @@ input.input {
 
 .success {
   color: green;
+}
+
+.transfer {
+  margin-top: 2em;
+  font-weight: bold;
+  transition: .3s;
+  width: 250px;
+}
+
+.transfer:hover {
+  background-color: #ccc;
+}
+
+.divider {
+  height: 2px;
+  width: 100%;
+  background-color: #6B69C8;
+  margin: 2em 0;
 }
