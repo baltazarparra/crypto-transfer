@@ -22,6 +22,7 @@ function App() {
   return (
     <>
       <main>
+        <span className="logo">Crypto <b>Transfer</b></span>
         <section>
           <div>
             <p>My address:</p>

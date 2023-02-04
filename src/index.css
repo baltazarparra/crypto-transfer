@@ -1,6 +1,6 @@
 body {
   font-family: 'Unbounded', cursive;
-  background: linear-gradient(#010034, #020111);
+  background-image: url(wavy.svg), linear-gradient(#010034, #020111);
   background-repeat: no-repeat;
   height: 100vh;
   color: white;
@@ -29,4 +29,13 @@ main {
   align-items: center;
   justify-content: center;
   height: 100vh;
+  position: relative;
+}
+
+.logo {
+  position: absolute;
+  top: 40px;
+  left: 20px;
+  width: 100px;
+  font-size: 1.4em;
 }
