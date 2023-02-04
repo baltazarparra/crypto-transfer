@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { getBalance, transfer } from './MetaMaskService'
+import { getBalance, transfer } from './services'
 
 function App() {
   const [address, setAddress] = useState('')
@@ -21,28 +21,30 @@ function App() {
 
   return (
     <>
-      <div>
-        <p>My address:</p>
-        <input type="text" onChange={(e) => setAddress(e.target.value)} value={address} />
-      </div>
-      <div>
-        <button onClick={() => checkBalance()}>Check Balance</button>
-        <p>Balance: {balance}</p>
-      </div>
-      <div>
-        <p>To Address:</p>
-        <input type="text" onChange={(e) => setToAddress(e.target.value)} />
-      </div>
-      <div>
-        <p>Quantity:</p>
-        <input type="text" onChange={(e) => setQuantity(e.target.value)} />
-      </div>
-      <hr />
-      <div>
-        <button onClick={() => sendTransfer()}>Transfer</button>
-      </div>
-      <hr />
-      <p>{message}</p>
+      <main>
+        <section>
+          <div>
+            <p>My address:</p>
+            <input type="text" onChange={(e) => setAddress(e.target.value)} value={address} />
+          </div>
+          <div>
+            <button onClick={() => checkBalance()}>Check Balance</button>
+            <p>Balance: {balance}</p>
+          </div>
+          <div>
+            <p>To Address:</p>
+            <input type="text" onChange={(e) => setToAddress(e.target.value)} />
+          </div>
+          <div>
+            <p>Quantity:</p>
+            <input type="text" onChange={(e) => setQuantity(e.target.value)} />
+          </div>
+          <div>
+            <button onClick={() => sendTransfer()}>Transfer</button>
+          </div>
+          <p>{message}</p>
+        </section>
+      </main>
     </>
   );
 }
