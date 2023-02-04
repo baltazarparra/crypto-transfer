@@ -1,11 +1,14 @@
 import { ethers } from 'ethers'
 
+const { ethereum } = window;
+
 const getMetaMaskProvider = async () => {
-    if (!window.ethereum) throw new Error('No MetaMask found! please login')
+    if (!ethereum) throw new Error('No MetaMask found! please login')
 
-    await window.ethereum.send('eth_requestAccounts')
+    await ethereum.send('eth_requestAccounts')
 
-    const provider = new ethers.providers.Web3Provider(window.ethereum, 'any')
+    const provider = new ethers.providers.Web3Provider(ethereum, 'any')
+
     provider.on('network', (newNetwork, oldNetwork) => {
         if (oldNetwork) window.location.reload()
     })
@@ -21,7 +24,7 @@ export const getBalance = async (address) => {
 }
 
 export const transfer = async (address, quantity) => {
-    const provider = await getMetaMaskProvider()
+    const provider = await getMetaMaskProvider() 
     const signer = provider.getSigner()
 
     ethers.utils.getAddress(address)
