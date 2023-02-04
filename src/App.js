@@ -1,11 +1,10 @@
 import { useState } from 'react'
 import { getBalance, transfer } from './services'
-import { isMobile } from "react-device-detect";
+import { isMobile } from 'react-device-detect'
 
 function App() {
-  const { ethereum } = window;
+  const { ethereum } = window
 
-  const [address, setAddress] = useState('')
   const [shortAddress, setShortAddress] = useState('')
   const [balance, setBalance] = useState('')
   const [toAddress, setToAddress] = useState('')
@@ -15,17 +14,16 @@ function App() {
   const [metaMasknotFound, setMetaMaskNotFound] = useState(false)
 
   window.onload = () => {
-    isConnected();
-  };
+    isConnected()
+  }
         
   async function isConnected() {
     if (!ethereum) return setMetaMaskNotFound(true)
 
-    const accounts = await ethereum.request({method: 'eth_accounts'});
+    const accounts = await ethereum.request({method: 'eth_accounts'})
 
     if (accounts.length) {
       setIsLogged(true)
-      setAddress(ethereum.selectedAddress)
       setShortAddress(ethereum.selectedAddress.substring(0,6) + "..." + ethereum.selectedAddress.slice(-4))
     } else {
       setIsLogged(false)
@@ -33,7 +31,7 @@ function App() {
   }
 
   const checkBalance = async () => {
-    const balance = await getBalance(address)
+    const balance = await getBalance(ethereum.selectedAddress)
     setBalance(balance)
     setMessage('')
   }
@@ -49,12 +47,10 @@ function App() {
   }
 
   const login = async () => {
-    await ethereum.send('eth_requestAccounts')
+    await ethereum.request({ method: 'eth_requestAccounts' })
     setIsLogged(true)
     setShortAddress(ethereum.selectedAddress.substring(0,6) + "..." + ethereum.selectedAddress.slice(-4))
   }
-
-  console.log('transaction', message);
 
   return (
     <>
@@ -81,6 +77,7 @@ function App() {
             <div>
               <button className="transfer" onClick={() => sendTransfer()}>Transfer</button>
             </div>
+            <small className="disclaimer">Only support ETH & BNB tokens, for now</small>
             {message && <p className="success">Success ✓</p>}
           </section>
         ) : (
@@ -118,7 +115,7 @@ function App() {
         <a href="https://baltazarparra.github.io" target="_blank" rel="noreferrer">baltazarparra</a> | <span>version 0.14.3 alpha</span>
       </footer>
     </>
-  );
+  )
 }
 
 export default App

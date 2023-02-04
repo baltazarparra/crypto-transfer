@@ -5,11 +5,9 @@ const { ethereum } = window;
 const getMetaMaskProvider = async () => {
     if (!ethereum) throw new Error('No MetaMask found! please login')
 
-    await ethereum.send('eth_requestAccounts')
-
     const provider = new ethers.providers.Web3Provider(ethereum, 'any')
 
-    provider.on('network', (newNetwork, oldNetwork) => {
+    provider.on('network', (_, oldNetwork) => {
         if (oldNetwork) window.location.reload()
     })
 

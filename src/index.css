@@ -25,6 +25,10 @@ button, input {
   cursor: pointer;
 }
 
+input {
+  padding: 0 1em;
+}
+
 main {
   display: flex;
   align-items: center;
@@ -129,4 +133,10 @@ input.input {
   width: 100%;
   background-color: #6B69C8;
   margin: 2em 0;
+}
+
+.disclaimer {
+  font-size: .7em;
+  font-weight: lighter;
+  color: #e39595;
 }
