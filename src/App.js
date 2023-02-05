@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { getBalance, transfer } from './services'
 import { isMobile } from 'react-device-detect'
+import { ethers } from 'ethers'
 
 function App() {
   const { ethereum } = window
@@ -52,9 +53,24 @@ function App() {
     setShortAddress(ethereum.selectedAddress.substring(0,6) + "..." + ethereum.selectedAddress.slice(-4))
   }
 
+  const isETH = ethereum.networkVersion === '1'
+  const isBNB = ethereum.networkVersion === '56'
+  const isGoerli = ethereum.networkVersion === '5'
+  const isTBNB = ethereum.networkVersion === '97'
+  const isTestnet = isGoerli || isTBNB
+
+  useEffect(() => {
+    const provider = new ethers.providers.Web3Provider(ethereum, 'any')
+
+    provider.on('network', (_, oldNetwork) => {
+        if (oldNetwork) window.location.reload()
+    })
+  }, [])
+
   return (
     <>
       <main>
+        {isTestnet && <span className="testnet">testnet</span>}
         <span className="logo">Crypto <b>Transfer</b></span>
         {isLogged && !isMobile ? (
           <section>
@@ -65,6 +81,10 @@ function App() {
               <button className="input" onClick={() => checkBalance()}>Check Balance</button>
             </div>
             <input readOnly className="input" type="text" value={balance ? balance : '0.00000'} />
+            <span className="tokens">
+              {isETH && <img className="token" alt="token" src="https://token.metaswap.codefi.network/assets/networkLogos/ethereum.svg" />}
+              {isBNB && <img className="token" alt="token" src="https://token.metaswap.codefi.network/assets/networkLogos/bsc.svg" />}
+            </span>
             <span className="divider"></span>
             <div>
               <p className="label">Transfer to:</p>
