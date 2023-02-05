@@ -2,7 +2,7 @@ import { ethers } from 'ethers'
 
 const { ethereum } = window;
 
-const getMetaMaskProvider = async () => {
+export const getMetaMaskProvider = async () => {
     if (!ethereum) throw new Error('No MetaMask found! please login')
 
     const provider = new ethers.providers.Web3Provider(ethereum, 'any')

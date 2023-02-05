@@ -1,7 +1,6 @@
-import { useState, useEffect } from 'react'
-import { getBalance, transfer } from './services'
+import { useState } from 'react'
+import { getMetaMaskProvider, getBalance, transfer } from './services'
 import { isMobile } from 'react-device-detect'
-import { ethers } from 'ethers'
 
 function App() {
   const { ethereum } = window
@@ -20,6 +19,7 @@ function App() {
         
   async function isConnected() {
     if (!ethereum) return setMetaMaskNotFound(true)
+    await getMetaMaskProvider()
 
     const accounts = await ethereum.request({method: 'eth_accounts'})
 
@@ -58,14 +58,6 @@ function App() {
   const isGoerli = ethereum.networkVersion === '5'
   const isTBNB = ethereum.networkVersion === '97'
   const isTestnet = isGoerli || isTBNB
-
-  useEffect(() => {
-    const provider = new ethers.providers.Web3Provider(ethereum, 'any')
-
-    provider.on('network', (_, oldNetwork) => {
-        if (oldNetwork) window.location.reload()
-    })
-  }, [])
 
   return (
     <>
